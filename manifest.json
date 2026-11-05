@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Karasu Enhancer",
+  "short_name": "Karasu",
+  "version": "1.0.0",
+  "minimum_chrome_version": "111",
+  "homepage_url": "https://github.com/fripex",
+  "description": "Auto-ready, map stats on karasu.live.",
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": ["storage", "notifications"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://karasu.live/*", "https://*.karasu.live/*"],
+      "js": ["hook.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://karasu.live/*", "https://*.karasu.live/*"],
+      "js": ["i18n.js", "mapstats.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://karasu.live/*", "https://*.karasu.live/*"],
+      "js": ["i18n.js", "content.js", "elo.js", "session-stats.js", "map-optimizer.js", "notifications.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Karasu Enhancer"
+  }
+}

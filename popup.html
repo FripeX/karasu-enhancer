@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karasu Enhancer</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="mark" id="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 14c2.5-5 5.8-8 9-8s6.5 3 9 8c-2.7-1.6-5.9-2.6-9-2.6S5.7 12.4 3 14Z"/>
+        <path d="M11 10 9 6M13 10l2-4"/>
+      </svg>
+      <img id="logo-img" src="https://api.karasu.live/branding/logo" alt="" referrerpolicy="no-referrer">
+    </div>
+    <div class="title"><strong>Karasu Enhancer</strong></div>
+    <span class="ver" id="version"></span>
+  </header>
+
+  <h2 class="eyebrow" data-i18n="groupMatch">Matchmaking</h2>
+  <section class="list">
+    <label class="row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>
+      <span class="txt"><b data-i18n="autoReady">Auto-ready</b><small data-i18n="autoReadyHint">Clique sur READY dès que le match est trouvé</small></span>
+      <input type="checkbox" role="switch" data-key="autoReady">
+    </label>
+    <div class="subrow" id="delay-box" aria-disabled="false">
+      <span class="txt"><b id="delay-label" data-i18n="readyDelay">Délai avant le clic</b></span>
+      <label class="field">
+        <input type="number" id="delay" min="0" max="10" step="0.5" value="0" inputmode="decimal" aria-labelledby="delay-label">
+        <span>s</span>
+      </label>
+    </div>
+    <label class="row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="txt"><b data-i18n="notifications">Notifications</b><small data-i18n="notificationsHint">Alerte quand un match est trouvé</small></span>
+      <input type="checkbox" role="switch" data-key="notifications">
+    </label>
+  </section>
+
+  <h2 class="eyebrow" data-i18n="groupOverlay">Affichages en jeu</h2>
+  <section class="list">
+    <label class="row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>
+      <span class="txt"><b data-i18n="teamElo">Elo des équipes</b><small data-i18n="teamEloHint">Moyenne, chances de victoire et gain d'Elo prévu</small></span>
+      <input type="checkbox" role="switch" data-key="teamElo">
+    </label>
+    <label class="row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
+      <span class="txt"><b data-i18n="mapStats">Stats de maps</b><small data-i18n="mapStatsHint">Ton % de victoire sur chaque map du lobby</small></span>
+      <input type="checkbox" role="switch" data-key="mapStats">
+    </label>
+    <label class="row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.3c.6-.2 1.3-.3 2-.3 2.2 0 4 1.8 4 4"/></svg>
+      <span class="txt"><b data-i18n="teamMapStats">Stats de maps des équipes</b><small data-i18n="teamMapStatsHint">Moyenne des 30 derniers matchs de chaque équipe, par map</small></span>
+      <input type="checkbox" role="switch" data-key="teamMapStats">
+    </label>
+    <label class="row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2l-8 8h6l-6 8 14-10h-6l8-8z"/></svg>
+      <span class="txt"><b data-i18n="mapOptimizer">Meilleurs picks</b><small data-i18n="mapOptimizerHint">Suggère les maps où tu as le meilleur winrate</small></span>
+      <input type="checkbox" role="switch" data-key="mapOptimizer">
+    </label>
+    <label class="row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span class="txt"><b data-i18n="sessionStats">Stats en live</b><small data-i18n="sessionStatsHint">Affiche K/D et KDA pendant le match</small></span>
+      <input type="checkbox" role="switch" data-key="sessionStats">
+    </label>
+  </section>
+
+  <p id="status"><span class="led" id="dot"></span><span id="status-text"></span></p>
+
+  <footer>
+    <a class="author" href="https://github.com/fripex" target="_blank" rel="noopener noreferrer" data-i18n-title="authorLink" title="Voir le GitHub de FripeX">
+      <img id="author-img" src="https://i.ibb.co/bMS7KJ4t/7c879cb6-706f-474d-8289-3afa3d3b6a36-fullsize.webp" alt="" width="18" height="18" referrerpolicy="no-referrer">
+      <b>FripeX</b>
+    </a>
+    <span class="seg" role="group" data-i18n-aria="language" aria-label="Langue">
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </span>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
