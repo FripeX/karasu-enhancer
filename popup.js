@@ -47,10 +47,6 @@ delayInput.addEventListener("change", () => {
 });
 delayInput.addEventListener("keydown", (e) => { if (e.key === "Enter") delayInput.blur(); });
 
-const langButtons = document.querySelectorAll(".seg button");
-langButtons.forEach((btn) => {
-  btn.addEventListener("click", () => chrome.storage.sync.set({ lang: btn.dataset.lang }));
-});
 
 let matchCount = null; // null until storage has answered
 
@@ -67,7 +63,6 @@ function applyLang() {
   document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = I.t(el.dataset.i18n); });
   document.querySelectorAll("[data-i18n-title]").forEach((el) => { el.title = I.t(el.dataset.i18nTitle); });
   document.querySelectorAll("[data-i18n-aria]").forEach((el) => { el.setAttribute("aria-label", I.t(el.dataset.i18nAria)); });
-  langButtons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === I.lang)));
   $("version").textContent = `v${chrome.runtime.getManifest().version}`;
   renderStatus();
 }
